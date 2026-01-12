@@ -14,7 +14,7 @@ import { InjectModel } from '@nestjs/mongoose';
 export class PokemonService {
   constructor(
     @InjectModel(Pokemon.name)
-    private readonly pokemonModel: Model<Pokemon>,
+    public pokemonModel: Model<Pokemon>,
   ) {}
 
   async create(createPokemonDto: CreatePokemonDto) {

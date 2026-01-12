@@ -4,26 +4,33 @@
 
 # Ejecutar en desarrollo
 
-1. Clonar el repositorio
-2. Ejecutar
+1. Clone the repository
+
+2. Execute
 
 ```
 yarn install
 ```
 
-3. Tener Nest CLI instalado
+3. Install Nest CLI
 
 ```
 npm i -g @nestjs/cli
 ```
 
-3. Levantar la DB
+4. Set up the DB
 
 ```
 docker-compose up -d
 ```
 
-## Stack Utilizado
+4. Populate the DB with the Seed
+
+```
+localhost:3000/api/v2/seed
+```
+
+## Stack Used
 
 - Nest.js
 - MongoDB
