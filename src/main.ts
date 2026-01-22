@@ -21,4 +21,33 @@ async function bootstrap() {
   await app.listen(process.env.PORT ?? 3000);
   console.log(`Application running on port ${process.env.PORT}`);
 }
-bootstrap();
+
+let app;
+
+export default async function handler(req, res) {
+  if (!app) {
+    app = await NestFactory.create(AppModule);
+
+    app.useGlobalPipes(
+      new ValidationPipe({
+        whitelist: true,
+        forbidNonWhitelisted: true,
+        transform: true,
+        transformOptions: {
+          enableImplicitConversion: true,
+        },
+      }),
+    );
+
+    app.enableCors();
+
+    await app.init();
+  }
+
+  return app.getHttpAdapter().getInstance()(req, res);
+}
+
+// Solo ejecutar bootstrap en desarrollo
+if (process.env.NODE_ENV !== 'production') {
+  bootstrap();
+}
